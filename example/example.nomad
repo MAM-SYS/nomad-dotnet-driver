@@ -13,7 +13,7 @@ job "example" {
       }
 
       artifact {
-        source = "http://localhost/test_nomad_task.zip"
+        source = "https://github.com/MAM-SYS/nomad-dotnet-driver.git/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask.dll"
         destination = "local"
       }
     }

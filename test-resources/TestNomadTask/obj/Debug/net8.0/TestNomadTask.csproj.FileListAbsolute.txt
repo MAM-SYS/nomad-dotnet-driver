@@ -1,0 +1,15 @@
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask.deps.json
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask.runtimeconfig.json
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask.dll
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/bin/Debug/net8.0/TestNomadTask.pdb
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.AssemblyInfoInputs.cache
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.AssemblyInfo.cs
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.csproj.CoreCompileInputs.cache
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.sourcelink.json
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.dll
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/refint/TestNomadTask.dll
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.pdb
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/TestNomadTask.genruntimeconfig.cache
+/Users/hossein/Developers/github/nomad-dotnet-driver/test-resources/TestNomadTask/obj/Debug/net8.0/ref/TestNomadTask.dll
