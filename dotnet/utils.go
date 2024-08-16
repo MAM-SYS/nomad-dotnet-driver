@@ -61,7 +61,7 @@ func findDotnetUnix() (string, error) {
 		"/usr/local/share/dotnet/dotnet",
 		"/usr/share/dotnet/dotnet",
 		"/opt/dotnet/dotnet",
-		"usr/local/dotnet/dotnet",
+		"/usr/local/dotnet/dotnet",
 	}
 
 	for _, path := range paths {
@@ -74,15 +74,17 @@ func findDotnetUnix() (string, error) {
 }
 
 func CheckDotnetVersionInfo(config Config) (version string, err error) {
+	fmt.Println("************CheckDotnetVersionInfo************")
 	var (
 		out        bytes.Buffer
 		dotnetPath string
 	)
-
+	fmt.Println("*********SDKPATH ", config.SdkPath)
 	if config.SdkPath != "" {
 		dotnetPath = config.SdkPath
 	} else {
 		absPath, fail := getDotnetPath()
+		fmt.Println("*****ELSE", absPath)
 		if fail != nil {
 			fail = fmt.Errorf("failed to find dotnet SDK: %v", fail)
 			return

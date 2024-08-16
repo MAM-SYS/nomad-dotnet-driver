@@ -96,6 +96,7 @@ var (
 		"gc": hclspec.NewBlock("gc", false, hclspec.NewObject(map[string]*hclspec.Spec{
 			"enable":               hclspec.NewAttr("enable", "bool", false),
 			"concurrent":           hclspec.NewAttr("concurrent", "bool", false),
+			"heap_count":           hclspec.NewAttr("heap_count", "number", false),
 			"heap_limit":           hclspec.NewAttr("heap_limit", "number", false),
 			"heap_limit_percent":   hclspec.NewAttr("heap_limit_percent", "number", false),
 			"no_affinity":          hclspec.NewAttr("no_affinity", "bool", false),
@@ -278,7 +279,7 @@ type Driver struct {
 
 func NewDriver(ctx context.Context, logger hclog.Logger) drivers.DriverPlugin {
 	logger = logger.Named(pluginName)
-
+	logger.Info("****Entry Point****")
 	return &Driver{
 		eventer: eventer.NewEventer(ctx, logger),
 		config:  *new(Config),
@@ -298,6 +299,7 @@ func (d *Driver) ConfigSchema() (*hclspec.Spec, error) {
 
 func (d *Driver) SetConfig(cfg *base.Config) error {
 	// unpack, validate, and set agent plugin config
+	d.logger.Info("*****SetConfig******", cfg)
 	var config Config
 
 	if len(cfg.PluginConfig) != 0 {
@@ -308,6 +310,8 @@ func (d *Driver) SetConfig(cfg *base.Config) error {
 	if err := config.validate(); err != nil {
 		return err
 	}
+	d.logger.Info("*****SetConfig******", config)
+
 	d.config = config
 
 	if cfg.AgentConfig != nil {
@@ -346,6 +350,7 @@ func (d *Driver) handleFingerprint(ctx context.Context, ch chan *drivers.Fingerp
 }
 
 func (d *Driver) buildFingerprint() *drivers.Fingerprint {
+	d.logger.Info("*********buildFingerprint********")
 	fp := &drivers.Fingerprint{
 		Attributes:        map[string]*pstructs.Attribute{},
 		Health:            drivers.HealthStateHealthy,
@@ -439,6 +444,7 @@ func (d *Driver) RecoverTask(handle *drivers.TaskHandle) error {
 }
 
 func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drivers.DriverNetwork, error) {
+	d.logger.Info("*****StartTask*****")
 	if _, ok := d.tasks.Get(cfg.ID); ok {
 		return nil, nil, fmt.Errorf("task with ID %q already started", cfg.ID)
 	}
@@ -456,6 +462,7 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 		return nil, nil, fmt.Errorf("dll_path must be specified")
 	}
 
+	d.logger.Info("*********SDKPATH ", d.config.SdkPath)
 	args := dotnetCmdArgs(taskConfig)
 
 	var fileConfig = new(ConfigFile)
@@ -482,8 +489,9 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 	d.logger.Info("starting dotnet task", "driver_cfg", hclog.Fmt("%+v", taskConfig), "args", args)
 
 	handle := drivers.NewTaskHandle(taskHandleVersion)
+	d.logger.Info("1******** %v", handle)
 	handle.Config = cfg
-
+	d.logger.Info("2******** %v", handle)
 	pluginLogFile := filepath.Join(cfg.TaskDir().Dir, "executor.out")
 	executorConfig := &executor.ExecutorConfig{
 		LogFile:     pluginLogFile,
@@ -519,6 +527,10 @@ func (d *Driver) StartTask(cfg *drivers.TaskConfig) (*drivers.TaskHandle, *drive
 		return nil, nil, err
 	}
 	d.logger.Debug("task capabilities", "capabilities", caps)
+	d.logger.Debug("*********** All Plugin Config: ", PluginConfig.Config)
+	d.logger.Debug("*********** SDK PATH: ", PluginConfig.Config["sdk_path"])
+
+	// Print the new working directory to verify the change
 
 	execCmd := &executor.ExecCommand{
 		Cmd:              PluginConfig.Config["sdk_path"].(string),
