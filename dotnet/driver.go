@@ -47,6 +47,15 @@ const (
 	taskHandleVersion = 1
 )
 
+func PluginLoader(opts map[string]string) (map[string]interface{}, error) {
+	conf := map[string]interface{}{}
+	if v, ok := opts["dotnet.sdk_path"]; ok {
+		conf["sdk_path"] = v
+	}
+
+	return conf, nil
+}
+
 var (
 	// PluginID is the dotnet plugin metadata registered in the plugin
 	// catalog.
@@ -84,6 +93,7 @@ var (
 			hclspec.NewAttr("allow_caps", "list(string)", false),
 			hclspec.NewLiteral(capabilities.HCLSpecLiteral),
 		),
+		"sdk_path": hclspec.NewAttr("sdk_path", "string", false),
 	})
 
 	// taskConfigSpec is the hcl specification for the driver config section of

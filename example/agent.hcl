@@ -10,4 +10,7 @@ client {
 }
 
 plugin "dotnet" {
+    config {
+        sdk_path = "/usr/local/bin/dotnet"
+    }
 }
