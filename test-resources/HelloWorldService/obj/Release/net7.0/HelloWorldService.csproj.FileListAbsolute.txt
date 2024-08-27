@@ -1,0 +1,14 @@
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/bin/Release/net7.0/HelloWorldService
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/bin/Release/net7.0/HelloWorldService.deps.json
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/bin/Release/net7.0/HelloWorldService.runtimeconfig.json
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/bin/Release/net7.0/HelloWorldService.dll
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/bin/Release/net7.0/HelloWorldService.pdb
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.AssemblyInfoInputs.cache
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.AssemblyInfo.cs
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.csproj.CoreCompileInputs.cache
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.dll
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/refint/HelloWorldService.dll
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.pdb
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/HelloWorldService.genruntimeconfig.cache
+/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/HelloWorldService/obj/Release/net7.0/ref/HelloWorldService.dll
