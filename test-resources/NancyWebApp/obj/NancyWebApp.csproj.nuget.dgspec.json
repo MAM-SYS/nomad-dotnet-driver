@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/NancyWebApp/NancyWebApp.csproj": {}
+  },
+  "projects": {
+    "/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/NancyWebApp/NancyWebApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/NancyWebApp/NancyWebApp.csproj",
+        "projectName": "NancyWebApp",
+        "projectPath": "/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/NancyWebApp/NancyWebApp.csproj",
+        "packagesPath": "/Users/mamsi/.nuget/packages/",
+        "outputPath": "/Users/mamsi/Developer/github/nomad-dotnet-driver/test-resources/NancyWebApp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mamsi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Nancy": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Nancy.Hosting.Self": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.410/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
