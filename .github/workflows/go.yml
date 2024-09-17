@@ -22,7 +22,7 @@ jobs:
         go-version: '1.22'
 
     - name: Build
-      run: go mod download && make build
+      run: go mod tidy && make build
 
     - name: Test
       run: make run-test
