@@ -54,7 +54,7 @@ jobs:
         go-version: '1.22'
     - name: Build the project
       run: |
-        go build -o nomad-dotnet-driver
+        go build -o nomad-dotnet-driver .
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
