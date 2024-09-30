@@ -21,7 +21,7 @@ jobs:
           go-version: '1.22'
 
       - name: Build the project
-        run: make build
+        run: go mod tidy && make build
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
