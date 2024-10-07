@@ -3,7 +3,9 @@ name: Go Release
 on:
   push:
     tags:
-      - 'v*.*.*'   # Triggers on version tags like v1.0.0
+      - 'v*.*.*'
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -20,11 +22,19 @@ jobs:
         with:
           go-version: '1.22'
 
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
       - name: Install dependencies
         run: go mod tidy
 
       - name: Build the project
-        run: go mod tidy && make build
+        run: make build
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
