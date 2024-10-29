@@ -33,16 +33,46 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
-      - name: Build the project
-        run: make build
+      - name: Build for all platforms
+        uses: thatisuday/go-cross-build@v1
+        with:
+          platforms: 'linux/amd64, linux/arm64, darwin/amd64, darwin/arm64, windows/amd64, windows/arm64'
+          package: 'nomad-dotnet-driver'
+          name: 'nomad-dotnet-driver'
+          compress: 'true'
+          dest: 'release'
+#        run: |
+#           Create output directory
+#          mkdir -p release
+#
+#           Build for Linux amd64
+#          GOOS=linux GOARCH=amd64 go build -o release/nomad-dotnet-driver-0.0.1-linux-amd64 .
+#           Build for Linux arm64
+#          GOOS=linux GOARCH=arm64 go build -o release/nomad-dotnet-driver-0.0.1-linux-arm64 .
+#           Build for macOS arm64
+#          GOOS=darwin GOARCH=arm64 go build -o release/nomad-dotnet-driver-0.0.1-macos-arm64 .
+#           Build for macOS x64
+#          GOOS=darwin GOARCH=amd64 go build -o release/nomad-dotnet-driver-0.0.1-macos-x64 .
+#           Build for Windows arm64
+#          GOOS=windows GOARCH=arm64 go build -o release/nomad-dotnet-driver-0.0.1-win-arm64.exe .
+#           Build for Windows x64
+#          GOOS=windows GOARCH=amd64 go build -o release/nomad-dotnet-driver-0.0.1-win-x64.exe .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: nomad-dotnet-driver
+          files: |
+            release/nomad-dotnet-driver-0.0.1-linux-amd64
+            release/nomad-dotnet-driver-0.0.1-linux-arm64
+            release/nomad-dotnet-driver-0.0.1-macos-arm64
+            release/nomad-dotnet-driver-0.0.1-macos-x64
+            release/nomad-dotnet-driver-0.0.1-win-arm64.exe
+            release/nomad-dotnet-driver-0.0.1-win-x64.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload release assets
         uses: actions/upload-artifact@v3
         with:
           name: nomad-dotnet-driver
-          path: nomad-dotnet-driver
+          path: release/*
