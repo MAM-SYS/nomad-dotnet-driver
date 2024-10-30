@@ -1,23 +1,48 @@
-name: build
+name: Go Release
 
 on:
-  release:
-    types: [created] # trigger when a release is created
+  push:
+    tags:
+      - 'v*.*.*'
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build-go-binary:
+  release:
+    name: Release
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [linux, windows, darwin] # the required OSs
-        goarch: [amd64, arm64] # the required architectures
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: wangyoucao577/go-release-action@v1.30
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # a pre-defined secret to add files to Release
-          goos: ${{ matrix.goos }}
-          goarch: ${{ matrix.goarch }}
-          goversion: 1.22 # the required Go version
-          binary_name: "dotnet-nomad" # the name of the binary executable
-          extra_files: LICENSE README.md # the extra files to add to the release
+          go-version: '1.22'
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Build the project
+        run: make build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: nomad-dotnet-driver
+
+      - name: Upload release assets
+        uses: actions/upload-artifact@v3
+        with:
+          name: nomad-dotnet-driver
+          path: nomad-dotnet-driver
