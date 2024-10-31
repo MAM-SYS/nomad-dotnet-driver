@@ -10,10 +10,10 @@ jobs:
     strategy:
       matrix:
         goos: [linux, windows, darwin]
-        goarch: [arm64]
+        goarch: [arm64 amd64]
         exclude:
           - goarch: arm64
-            goos: windows
+            goos: linux
     steps:
       - uses: actions/checkout@v4
       - uses: wangyoucao577/go-release-action@v1.52
@@ -21,6 +21,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          goversion:  "https://go.dev/dl/go1.22.8.linux-arm64.tar.gz"
+          goversion:  1.22.8
           binary_name: "hello"
           extra_files: LICENSE README.md
