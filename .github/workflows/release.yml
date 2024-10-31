@@ -24,3 +24,4 @@ jobs:
           goversion:  1.22.8
           binary_name: "nomad-dotnet-driver"
           extra_files: LICENSE README.md
+
