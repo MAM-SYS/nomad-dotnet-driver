@@ -23,7 +23,7 @@ jobs:
           go-version: 1.22
 
       - name: Download dependencies and create go.sum
-        run: go mod tidy
+        run: go mod download go mod tidy
 
       - uses: wangyoucao577/go-release-action@v1.30
         with:
