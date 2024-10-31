@@ -2,25 +2,25 @@ name: build
 
 on:
   release:
-    types: [created] # trigger when a release is created
+    types: [created]
 
 jobs:
   build-go-binary:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        goos: [linux, windows, darwin] # the required OSs
-        goarch: [amd64, arm64] # the required architectures
-        exclude: # exclude some OSs and architectures
+        goos: [linux, windows, darwin]
+        goarch: [amd64, arm64]
+        exclude:
           - goarch: arm64
             goos: windows
     steps:
       - uses: actions/checkout@v3
       - uses: wangyoucao577/go-release-action@v1.30
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # a pre-defined secret to add files to Release
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          goversion: 1.22 # the required Go version
-          binary_name: "hello" # the name of the binary executable
-          extra_files: LICENSE README.md # the extra files to add to the release
+          goversion: 1.18
+          binary_name: "hello"
+          extra_files: LICENSE README.md
