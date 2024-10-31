@@ -1,34 +1,26 @@
-# workflow name
-name: Generate release-artifacts
+name: build
 
-# on events
 on:
   release:
-    types:
-      - created
+    types: [created] # trigger when a release is created
 
-# workflow tasks
 jobs:
-  generate:
-    name: Generate cross-platform builds
+  build-go-binary:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin] # the required OSs
+        goarch: [amd64, arm64] # the required architectures
+        exclude: # exclude some OSs and architectures
+          - goarch: arm64
+            goos: windows
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-
-      - name: Set up Go
-        uses: actions/setup-go@v4
+      - uses: actions/checkout@v3
+      - uses: wangyoucao577/go-release-action@v1.30
         with:
-          go-version: '1.22'
-
-      - name: Download dependencies
-        run: go mod tidy
-
-      - name: Generate build files
-        uses: thatisuday/go-cross-build@v1
-        with:
-          platforms: 'linux/amd64, darwin/amd64, windows/amd64'
-          package: 'demo'
-          name: 'program'
-          compress: 'true'
-          dest: 'dist'
+          github_token: ${{ secrets.GITHUB_TOKEN }} # a pre-defined secret to add files to Release
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          goversion: 1.22 # the required Go version
+          binary_name: "hello" # the name of the binary executable
+          extra_files: LICENSE README.md # the extra files to add to the release
