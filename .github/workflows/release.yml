@@ -1,23 +1,25 @@
-name: build
+# workflow name
+name: Generate release-artifacts
 
+# on events
 on:
   release:
-    types: [created] # trigger when a release is created
+    types: 
+        - created
 
+# workflow tasks
 jobs:
-  build-go-binary:
+  generate:
+    name: Generate cross-platform builds
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [linux, windows, darwin] # the required OSs
-        goarch: [amd64, arm64] # the required architectures
     steps:
-      - uses: actions/checkout@v3
-      - uses: wangyoucao577/go-release-action@v1.30
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Generate build files
+        uses: thatisuday/go-cross-build@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # a pre-defined secret to add files to Release
-          goos: ${{ matrix.goos }}
-          goarch: ${{ matrix.goarch }}
-          goversion: 1.22 # the required Go version
-          binary_name: "dotnet-nomad" # the name of the binary executable
-          extra_files: LICENSE README.md # the extra files to add to the release
+            platforms: 'linux/amd64, darwin/amd64, windows/amd64'
+            package: 'demo'
+            name: 'program'
+            compress: 'true'
+            dest: 'dist'
